@@ -1,0 +1,27 @@
+function print_shortest_substrings(s, x) {
+    const lastIndex = {}; //hasmap 
+
+     // initializations
+    let result = "not-found";
+    let shortestLength = Infinity;
+
+//iterate string 
+    for (let i = 0; i < s.length; i++) {
+        const currentChar = s[i];
+
+        if (lastIndex[currentChar] !== undefined) {
+            const substringLength = i - lastIndex[currentChar] + 1;
+
+            if (substringLength >= x && substringLength < shortestLength) {
+                result = s.substring(lastIndex[currentChar], i + 1);
+                shortestLength = substringLength;
+            } else if (substringLength >= x && substringLength === shortestLength) {
+                result += " " + s.substring(lastIndex[currentChar], i + 1);
+            }
+        }
+
+        lastIndex[currentChar] = i;
+    }
+
+    return result;
+}
