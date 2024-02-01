@@ -1,0 +1,31 @@
+function processString(input) {
+    // Converting the string to an array of characters for easy manipulation
+    let charArray = input.split('');
+
+    // Iterating over each character and perform the required operations
+    for (let i = 0; i < charArray.length; i++) {
+        let asciiValue = charArray[i].charCodeAt(0);
+
+        // Checking if the ASCII value is even or odd
+        if (asciiValue % 2 === 0) {
+            // Incrementing the next character by (ASCII_value % 7)
+            if (i < charArray.length - 1) {
+                charArray[i + 1] = String.fromCharCode(charArray[i + 1].charCodeAt(0) + (asciiValue % 7));
+            }
+        } else {
+            // Decrementing the previous character by (ASCII_value % 5)
+            if (i > 0) {
+                charArray[i - 1] = String.fromCharCode(charArray[i - 1].charCodeAt(0) - (asciiValue % 5));
+            }
+        }
+
+        // Checking if the new number is an invalid ASCII value and replace it with 83
+        if (charArray[i].charCodeAt(0) < 0 || charArray[i].charCodeAt(0) > 127) {
+            charArray[i] = String.fromCharCode(83);
+        }
+    }
+
+    // Converting the array back to a string and return the final result
+    return charArray.join('');
+}
+
